@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="MvvMSample.Views.ChampionshipBetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+             xmlns:local="clr-namespace:MvvMSample.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <local:ChampionshipViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Path="ChampionshipBetViewModel" Source="{StaticResource Locator}" />
+    </UserControl.DataContext>
+    <Grid>
+        <ListView ItemsSource="{Binding FootballClubs}" ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top" dd:DragDrop.IsDragSource="True"
+             dd:DragDrop.IsDropTarget="True"
+             dd:DragDrop.DropHandler="{Binding}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="false">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FullName}" Header="Name" Width="180"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=NickName}" Header="Nickname" Width="180"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CreationYear}"  Header="Creation year" Width="180"/>
+                </GridView>
+            </ListView.View>
+          
+        </ListView>
+    </Grid>
+</UserControl>
