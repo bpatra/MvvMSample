@@ -74,7 +74,7 @@ namespace MvvMSample.ViewModels
                 var sortedIndices = block.Select(c => FootballClubs.IndexOf(c)).OrderBy(i => i).ToArray();
                 if (IsANonDiscontiguousInterval(sortedIndices))
                 {
-                    return (IEnumerable<IFootballClub>)data;
+                    return (IEnumerable<IFootballClub>) data;
                 }
 
                 return Enumerable.Empty<IFootballClub>();
