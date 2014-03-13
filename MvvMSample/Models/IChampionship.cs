@@ -9,7 +9,7 @@ namespace MvvMSample.Models
 {
     public interface IChampionship
     {
-        IList<IFootballClub> CurrentChampionShipRanking { get; }
+        List<IFootballClub> CurrentChampionShipRanking { get; }
 
         List<IFootballClub> UserBet { get; set; }
 

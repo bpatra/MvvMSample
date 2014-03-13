@@ -13,6 +13,7 @@ namespace MvvMSampleTests
     public class ChampionshipBetViewModel_DragAndDrop_Tests
     {
         private readonly ChampionshipBetViewModel _championshipBetViewModel;
+        private readonly Mock<IChampionship> _championShip;
 
         private readonly IFootballClub _row1;
         private readonly IFootballClub _row2;
@@ -38,10 +39,10 @@ namespace MvvMSampleTests
             _row4 = row4.Object;
 
             var initialList = new List<IFootballClub>(new[] { row1.Object, row2.Object, row3.Object, row4.Object });
-            var championShip = new Mock<IChampionship>();
-            championShip.SetupGet(c => c.UserBet).Returns(initialList);
+            _championShip = new Mock<IChampionship>();
+            _championShip.SetupGet(c => c.UserBet).Returns(initialList);
 
-            _championshipBetViewModel = new ChampionshipBetViewModel(championShip.Object);
+            _championshipBetViewModel = new ChampionshipBetViewModel(_championShip.Object);
         }
 
         [TestMethod]
@@ -51,6 +52,14 @@ namespace MvvMSampleTests
             dropInfo.SetupGet(m => m.Data).Returns(new[] { _row2, _row4 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(0);
             _championshipBetViewModel.DragOver(dropInfo.Object);
+        }
+
+        [TestMethod]
+        public void When_Clicking_Save_Then_The_Football_List_Is_Passed_Back_To_The_Model()
+        {
+            _championshipBetViewModel.FootballClubs.Move(0,3);//the new order should be Club2, Club3, Club4, Club1
+            _championshipBetViewModel.ClickSave.Execute(null);
+            _championShip.VerifySet(c=>c.UserBet = It.Is<List<IFootballClub>>(x => x.Count==4 &&  x[0].FullName=="Club2" ), Times.Once);
         }
 
         [TestMethod]
