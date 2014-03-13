@@ -11,7 +11,7 @@ namespace MvvMSample.Models
     {
         IList<IFootballClub> CurrentChampionShipRanking { get; }
 
-        ObservableCollection<IFootballClub> UserBet { get; }
+        List<IFootballClub> UserBet { get; set; }
 
         int GetGoodBetCount();
     }

@@ -20,21 +20,26 @@ namespace MvvMSample.ViewModels
                 throw new NotImplementedException();
             }
 
-            public ObservableCollection<IFootballClub> UserBet { get
+            public List<IFootballClub> UserBet
             {
-                var clubs = new IFootballClub[]
-                    {
-                        new FootballClub("Fc Nantes", "Les Canaris", 1943),
-                        new FootballClub("Paris Saint Germain", "Les Parisiens", 1970),
-                        new FootballClub("Olympique de Marseille", "Les Olympiens", 1899),
-                        new FootballClub("AS Saint-Étienne", "Les Verts", 1919),
-                        new FootballClub("Olympique Lyonnais", "Les Gones", 1950),
-                        new FootballClub("Girondins de Bordaux", "les Girondins", 1919),
-                    };
+                get
+                {
+                    var clubs = new IFootballClub[]
+                        {
+                            new FootballClub("Fc Nantes", "Les Canaris", 1943),
+                            new FootballClub("Paris Saint Germain", "Les Parisiens", 1970),
+                            new FootballClub("Olympique de Marseille", "Les Olympiens", 1899),
+                            new FootballClub("AS Saint-Étienne", "Les Verts", 1919),
+                            new FootballClub("Olympique Lyonnais", "Les Gones", 1950),
+                            new FootballClub("Girondins de Bordaux", "les Girondins", 1919),
+                        };
 
-                return new ObservableCollection<IFootballClub>(clubs);
-            }}
-           
+                    return new List<IFootballClub>(clubs);
+
+                }
+                set { throw new NotImplementedException(); }
+            }
+
             private class FootballClub : IFootballClub
             {
                 public FootballClub(string name, string nickName, int creationYear)

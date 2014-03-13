@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GongSolutions.Wpf.DragDrop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,32 +14,32 @@ namespace MvvMSampleTests
     {
         private readonly ChampionshipBetViewModel _championshipBetViewModel;
 
-        private readonly IFootballClub _col1;
-        private readonly IFootballClub _col2;
-        private readonly IFootballClub _col3;
-        private readonly IFootballClub _col4;
+        private readonly IFootballClub _row1;
+        private readonly IFootballClub _row2;
+        private readonly IFootballClub _row3;
+        private readonly IFootballClub _row4;
 
         public ChampionshipBetViewModel_DragAndDrop_Tests()
         {
-            var col1 = new Mock<IFootballClub>();
-            col1.Setup(m => m.FullName).Returns("Club1");
-            _col1 = col1.Object;
+            var row1 = new Mock<IFootballClub>();
+            row1.Setup(m => m.FullName).Returns("Club1");
+            _row1 = row1.Object;
 
-            var col2 = new Mock<IFootballClub>();
-            col2.Setup(m => m.FullName).Returns("Club2");
-            _col2 = col2.Object;
+            var row2 = new Mock<IFootballClub>();
+            row2.Setup(m => m.FullName).Returns("Club2");
+            _row2 = row2.Object;
 
-            var col3 = new Mock<IFootballClub>();
-            col3.Setup(m => m.FullName).Returns("Club3");
-            _col3 = col3.Object;
+            var row3 = new Mock<IFootballClub>();
+            row3.Setup(m => m.FullName).Returns("Club3");
+            _row3 = row3.Object;
 
-            var col4 = new Mock<IFootballClub>();
-            col4.Setup(m => m.FullName).Returns("Club4");
-            _col4 = col4.Object;
+            var row4 = new Mock<IFootballClub>();
+            row4.Setup(m => m.FullName).Returns("Club4");
+            _row4 = row4.Object;
 
-            var colection = new ObservableCollection<IFootballClub>(new[] { col1.Object, col2.Object, col3.Object, col4.Object });
+            var initialList = new List<IFootballClub>(new[] { row1.Object, row2.Object, row3.Object, row4.Object });
             var championShip = new Mock<IChampionship>();
-            championShip.SetupGet(c => c.UserBet).Returns(colection);
+            championShip.SetupGet(c => c.UserBet).Returns(initialList);
 
             _championshipBetViewModel = new ChampionshipBetViewModel(championShip.Object);
         }
@@ -47,7 +48,7 @@ namespace MvvMSampleTests
         public void DragAndDrop_With_A_Non_Block_Source_Then_Nothing_ShouldHappen_In_DragOver()
         {
             var dropInfo = new Mock<IDropInfo>(MockBehavior.Strict); //nazi mock
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col2, _col4 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row2, _row4 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(0);
             _championshipBetViewModel.DragOver(dropInfo.Object);
         }
@@ -56,7 +57,7 @@ namespace MvvMSampleTests
         public void DragAndDrop_With_A_Non_Block_Source_Then_Nothing_ShouldHappen_In_Drop()
         {
             var dropInfo = new Mock<IDropInfo>(MockBehavior.Strict); //nazi mock
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col2, _col4 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row2, _row4 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(0);
             _championshipBetViewModel.Drop(dropInfo.Object);
         }
@@ -65,7 +66,7 @@ namespace MvvMSampleTests
         public void Simple_Block_Source_Below_The_Target_InsertIndex_Then_Drop_The_Columns_Should_Not_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col1 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row1 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(1);
 
             _championshipBetViewModel.Drop(dropInfo.Object);
@@ -80,7 +81,7 @@ namespace MvvMSampleTests
         public void Simple_Block_Source_Above_The_Target_InsertIndex_Then_Drop_The_Columns_Should_Not_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col1 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row1 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(0);
 
             _championshipBetViewModel.Drop(dropInfo.Object);
@@ -96,7 +97,7 @@ namespace MvvMSampleTests
         public void Simple_Block_Source_Last_Target_InsertIndex_Then_Drop_The_Columns_Should_Not_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col4 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row4 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(4);
 
             _championshipBetViewModel.Drop(dropInfo.Object);
@@ -111,7 +112,7 @@ namespace MvvMSampleTests
         public void Simple_Block_Source_Last_Target_InsertIndex2_Then_Drop_The_Columns_Should_Not_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col4 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row4 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(3);
 
             _championshipBetViewModel.Drop(dropInfo.Object);
@@ -126,7 +127,7 @@ namespace MvvMSampleTests
         public void Simple_Block_Source_Below_The_Target_Then_Drop_The_Columns_Should_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col1 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row1 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(2);
 
             _championshipBetViewModel.Drop(dropInfo.Object);
@@ -141,7 +142,7 @@ namespace MvvMSampleTests
         public void Simple_Block_Source_Below_The_Target3_Then_Drop_The_Columns_Should_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col1 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row1 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(3);
 
             _championshipBetViewModel.Drop(dropInfo.Object);
@@ -156,7 +157,7 @@ namespace MvvMSampleTests
         public void Simple_Block_Source_Below_The_Target2_Then_Drop_The_Columns_Should_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col1 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row1 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(4);
 
             _championshipBetViewModel.Drop(dropInfo.Object);
@@ -171,7 +172,7 @@ namespace MvvMSampleTests
         public void Simple_Block_Source_Above_The_Target_Then_Drop_The_Columns_Should_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col4 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row4 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(2);
 
             _championshipBetViewModel.Drop(dropInfo.Object);
@@ -186,7 +187,7 @@ namespace MvvMSampleTests
         public void Simple_Block_Source_Above_The_Target2_Then_Drop_The_Columns_Should_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col4 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row4 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(0);
 
             _championshipBetViewModel.Drop(dropInfo.Object);
@@ -201,7 +202,7 @@ namespace MvvMSampleTests
         public void Contiguous_Block_Source_Below_The_Target_Then_Drop_The_Columns_Should_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col3, _col4 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row3, _row4 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(1);
 
             _championshipBetViewModel.Drop(dropInfo.Object);
@@ -216,7 +217,7 @@ namespace MvvMSampleTests
         public void Contiguous_Block_Source_Above_The_Target_Then_Drop_The_Columns_Should_Be_Reorderer()
         {
             var dropInfo = new Mock<IDropInfo>();
-            dropInfo.SetupGet(m => m.Data).Returns(new[] { _col1, _col2 });
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _row1, _row2 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(4);
 
             _championshipBetViewModel.Drop(dropInfo.Object);

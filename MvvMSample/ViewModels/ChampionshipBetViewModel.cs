@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using GongSolutions.Wpf.DragDrop;
 using MvvMSample.Models;
 
@@ -13,12 +14,40 @@ namespace MvvMSample.ViewModels
 {
     public class ChampionshipBetViewModel : IChampionshipBetViewModel, IDropTarget
     {
+        private readonly IChampionship _championship;
         public ChampionshipBetViewModel(IChampionship championship)
         {
-            FootballClubs = championship.UserBet;
+            _championship = championship;
+            FootballClubs = new ObservableCollection<IFootballClub>(championship.UserBet);
         }
 
         public ObservableCollection<IFootballClub> FootballClubs { get; private set; }
+
+        public ICommand Save
+        {
+            get { return new MyRelayCommand(() => { _championship.UserBet = new List<IFootballClub>(FootballClubs); }); } //MVVM light is much more simpler with its relay commands...
+        }
+
+        private class MyRelayCommand : ICommand
+        {
+            private readonly Action _action;
+            public MyRelayCommand(Action action)
+            {
+                _action = action;
+            }
+
+            public bool CanExecute(object parameter)
+            {
+                return true;
+            }
+
+            public void Execute(object parameter)
+            {
+                _action();
+            }
+
+            public event EventHandler CanExecuteChanged;
+        }
 
         public void DragOver(IDropInfo dropInfo)
         {
