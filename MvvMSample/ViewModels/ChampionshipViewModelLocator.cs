@@ -14,7 +14,7 @@ namespace MvvMSample.ViewModels
 
         private class MyChampionship : IChampionship
         {
-            public IList<IFootballClub> CurrentChampionShipRanking { get{throw  new NotImplementedException();}}
+            public List<IFootballClub> CurrentChampionShipRanking { get{throw  new NotImplementedException();}}
             public int GetGoodBetCount()
             {
                 throw new NotImplementedException();
