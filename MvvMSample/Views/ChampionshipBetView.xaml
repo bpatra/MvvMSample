@@ -6,7 +6,7 @@
              xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
              xmlns:local="clr-namespace:MvvMSample.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="460">
     <UserControl.Resources>
         <ResourceDictionary>
             <local:ChampionshipViewModelLocator x:Key="Locator" d:IsDataSource="True" />
@@ -16,19 +16,18 @@
         <Binding Path="ChampionshipBetViewModel" Source="{StaticResource Locator}" />
     </UserControl.DataContext>
     <StackPanel>
-    <Grid>
-        <ListView ItemsSource="{Binding FootballClubs}" ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top" dd:DragDrop.IsDragSource="True"
+        <ListView ItemsSource="{Binding FootballClubs}"
+             dd:DragDrop.IsDragSource="True"
              dd:DragDrop.IsDropTarget="True"
              dd:DragDrop.DropHandler="{Binding}">
             <ListView.View>
                 <GridView AllowsColumnReorder="false">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=FullName}" Header="Name" Width="180"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=NickName}" Header="Nickname" Width="180"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=CreationYear}"  Header="Creation year" Width="180"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FullName}" Header="Name" Width="145"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=NickName}" Header="Nickname" Width="145"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CreationYear}"  Header="Creation year"  Width="145"/>
                 </GridView>
             </ListView.View>
         </ListView>
-    </Grid>
-        <Button Command="{Binding Save}" Content="Save" Margin="10,10,10,0"></Button>
+        <Button Command="{Binding ClickSave}" Content="Save" Width="75" Margin="0,20,0,0"></Button>
     </StackPanel>
 </UserControl>

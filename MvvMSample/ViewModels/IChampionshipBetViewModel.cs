@@ -14,6 +14,6 @@ namespace MvvMSample.ViewModels
     {
         ObservableCollection<IFootballClub> FootballClubs { get; }
 
-        ICommand Save { get; }
+        ICommand ClickSave { get; }
     }
 }

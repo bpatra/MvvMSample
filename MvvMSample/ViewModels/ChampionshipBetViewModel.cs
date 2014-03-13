@@ -23,9 +23,9 @@ namespace MvvMSample.ViewModels
 
         public ObservableCollection<IFootballClub> FootballClubs { get; private set; }
 
-        public ICommand Save
+        public ICommand ClickSave
         {
-            get { return new MyRelayCommand(() => { _championship.UserBet = new List<IFootballClub>(FootballClubs); }); } //MVVM light is much more simpler with its relay commands...
+            get { return new MyRelayCommand(() => { _championship.UserBet = new List<IFootballClub>(FootballClubs); }); } //MVVM light is much more simpler with its RelayCommand
         }
 
         private class MyRelayCommand : ICommand

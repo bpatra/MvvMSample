@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Views="clr-namespace:MvvMSample.Views" x:Class="MvvMSample.MainWindow"
-        Title="MainWindow" Height="350" Width="560">
+        Title="MainWindow" Height="250" Width="465">
     <Grid>
 
         <Views:ChampionshipBetView HorizontalAlignment="Left" VerticalAlignment="Top"/>
