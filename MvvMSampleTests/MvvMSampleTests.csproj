@@ -41,6 +41,7 @@
     <Reference Include="Moq">
       <HintPath>..\MvvMSample\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
   </ItemGroup>
   <Choose>

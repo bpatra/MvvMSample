@@ -8,6 +8,12 @@ using MvvMSample.Models;
 using MvvMSample.ViewModels;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Input;
+using GongSolutions.Wpf.DragDrop;
+using MvvMSample.Models;
+
 
 namespace MvvMSampleTests
 {
@@ -42,12 +48,29 @@ namespace MvvMSampleTests
         }
 
         [TestMethod]
-        public void DragAndDrop_With_A_Non_Block_Source_Then_Nothing_ShouldHappen_In_DragOver()
+        public void DragOver_With_A_Block_Source_Then_Effects_Should_Be_Set()
         {
-            var dropInfo = new Mock<IDropInfo>(MockBehavior.Strict); //nazi mock
+            var dropInfo = new Mock<IDropInfo>();
+            dropInfo.SetupGet(m => m.Data).Returns(new[] { _club1, _club2 });
+            dropInfo.SetupGet(m => m.InsertIndex).Returns(3);
+
+            _championshipBetViewModel.DragOver(dropInfo.Object);
+
+            dropInfo.VerifySet(x => x.DropTargetAdorner = It.IsAny<Type>(), Times.Once);
+            dropInfo.VerifySet(x => x.Effects = It.IsAny<DragDropEffects>(), Times.Once);
+        }
+
+        [TestMethod]
+        public void DragOver_With_A_Non_Block_Source_Then_No_Effects_Should_Be_Set()
+        {
+            var dropInfo = new Mock<IDropInfo>(); 
             dropInfo.SetupGet(m => m.Data).Returns(new[] { _club2, _club4 });
             dropInfo.SetupGet(m => m.InsertIndex).Returns(0);
+
             _championshipBetViewModel.DragOver(dropInfo.Object);
+
+            dropInfo.VerifySet(x => x.DropTargetAdorner = It.IsAny<Type>(), Times.Never);
+            dropInfo.VerifySet(x => x.Effects = It.IsAny<DragDropEffects>(), Times.Never);
         }
 
         [TestMethod]
@@ -148,10 +171,8 @@ namespace MvvMSampleTests
 
             _championshipBetViewModel.Drop(dropInfo.Object);
 
-            Assert.AreEqual("Club1", _championshipBetViewModel.FootballClubs[0].FullName);
-            Assert.AreEqual("Club2", _championshipBetViewModel.FootballClubs[1].FullName);
-            Assert.AreEqual("Club3", _championshipBetViewModel.FootballClubs[2].FullName);
-            Assert.AreEqual("Club4", _championshipBetViewModel.FootballClubs[3].FullName);
+            var resultClubs = _championshipBetViewModel.FootballClubs.Select(x => x.FullName).ToArray();
+            CollectionAssert.AreEqual(new[] { "Club1", "Club2", "Club3", "Club4" }, resultClubs);
         }
 
         [TestMethod]
