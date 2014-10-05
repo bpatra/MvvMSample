@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,6 @@ namespace MvvMSample.ViewModels
     {
         string SearchPlayerText { get; set; }
 
-        ICollection<IPlayer> DisplayedPlayers { get; } 
+        ICollectionView DisplayedPlayers { get; } 
     }
 }

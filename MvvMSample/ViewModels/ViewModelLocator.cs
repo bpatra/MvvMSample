@@ -12,7 +12,7 @@ namespace MvvMSample.ViewModels
     {
         public static IChampionshipBetViewModel ChampionshipBetViewModel { get { return new ChampionshipBetViewModel(new MyChampionship()); } }
 
-        public static IPlayerSearchViewModel PlayerSearchViewModel { get { return new PlayerSearchViewModel(); } }
+        public static IPlayerSearchViewModel PlayerSearchViewModel { get { return new PlayerSearchViewModel(new PlayerProvider()); } }
 
         private class MyChampionship : IChampionship
         {

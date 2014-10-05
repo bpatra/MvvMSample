@@ -4,21 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <StackPanel Margin="0 15 0 0">
-            <TextBlock Text="{Binding Path=Strings.ReceivedMails , Source={StaticResource Localizer}}"></TextBlock>
-            <TextBox Text="{Binding SearchReceivedMailText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <ListView ItemsSource="{Binding SearchedReceivedMails}" SelectedItem="{Binding SelectedReceivedMail}" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto">
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.DataContext>
+        <Binding Path="PlayerSearchViewModel" Source="{StaticResource Locator}" />
+    </UserControl.DataContext>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock Text="Search player"></TextBlock>
+            <TextBox Text="{Binding SearchPlayerText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        </StackPanel>
+        <ListView ItemsSource="{Binding DisplayedPlayers}"  SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.View>
                     <GridView >
-                        <GridViewColumn DisplayMemberBinding="{Binding Sender}" Header="{Binding Strings.Sender, Source={StaticResource Localizer}}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Recipients, Converter={StaticResource ArrayOfStringToStringConverter}}" Header="{Binding Strings.Recipients, Source={StaticResource Localizer}}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Subject}" Header="{Binding Strings.Subject, Source={StaticResource Localizer}}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Date, Converter={StaticResource DateTimeConverter}}" Header="{Binding Strings.Date, Source={StaticResource Localizer}}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                        <GridViewColumn DisplayMemberBinding="{Binding NationalTeam}" Header="National Team" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Age}" Header="Age" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Club}" Header="Club"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Championship}" Header="Championship"/>
                     </GridView>
                 </ListView.View>
             </ListView>
-        </StackPanel>
-    </Grid>
+    </DockPanel>
 </UserControl>

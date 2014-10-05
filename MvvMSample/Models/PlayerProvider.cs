@@ -9,7 +9,7 @@ namespace MvvMSample.Models
 {
     public class PlayerProvider : IPlayerProvider
     {
-        private const string path = @"D:\MvvMSample\MvvMSample\DBPlayerFrenchWC2014.csv";
+        private const string path = @"D:\MvvMSample\MvvMSample\DBPlayerFrenchWC2014UTF8.csv";
         private List<IPlayer> _list;
         public PlayerProvider()
         {
@@ -48,7 +48,6 @@ namespace MvvMSample.Models
             }
 
             return _list;
-
         }
     }
 }
