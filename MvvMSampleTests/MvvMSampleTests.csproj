@@ -58,6 +58,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ChampionshipBetViewModel_DragAndDrop_Tests.cs" />
+    <Compile Include="PlayerProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

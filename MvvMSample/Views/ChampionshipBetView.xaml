@@ -9,7 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="460">
     <UserControl.Resources>
         <ResourceDictionary>
-            <local:ChampionshipViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+            <local:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
         </ResourceDictionary>
     </UserControl.Resources>
     <UserControl.DataContext>

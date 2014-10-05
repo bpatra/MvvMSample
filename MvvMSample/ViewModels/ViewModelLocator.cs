@@ -8,9 +8,11 @@ using MvvMSample.Models;
 
 namespace MvvMSample.ViewModels
 {
-    public class ChampionshipViewModelLocator
+    public class ViewModelLocator
     {
         public static IChampionshipBetViewModel ChampionshipBetViewModel { get { return new ChampionshipBetViewModel(new MyChampionship()); } }
+
+        public static IPlayerSearchViewModel PlayerSearchViewModel { get { return new PlayerSearchViewModel(); } }
 
         private class MyChampionship : IChampionship
         {

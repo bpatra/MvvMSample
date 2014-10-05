@@ -63,13 +63,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IPlayer.cs" />
     <Compile Include="Models\IChampionship.cs" />
     <Compile Include="Models\IFootballClub.cs" />
+    <Compile Include="Models\IPlayerProvider.cs" />
+    <Compile Include="Models\PlayerProvider.cs" />
     <Compile Include="ViewModels\ChampionshipBetViewModel.cs" />
-    <Compile Include="ViewModels\ChampionshipViewModelLocator.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\IChampionshipBetViewModel.cs" />
+    <Compile Include="ViewModels\IPlayerSearchViewModel.cs" />
+    <Compile Include="ViewModels\PlayerSearchViewModel.cs" />
     <Compile Include="Views\ChampionshipBetView.xaml.cs">
       <DependentUpon>ChampionshipBetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerSearchControl.xaml.cs">
+      <DependentUpon>PlayerSearchControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -84,6 +92,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ChampionshipBetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayerSearchControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
