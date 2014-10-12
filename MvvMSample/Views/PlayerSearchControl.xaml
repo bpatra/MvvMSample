@@ -14,7 +14,7 @@
         <ListView ItemsSource="{Binding DisplayedPlayers}"  SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.View>
                     <GridView >
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                        <GridViewColumn DisplayMemberBinding="{Binding N}" Header="Name" />
                         <GridViewColumn DisplayMemberBinding="{Binding NationalTeam}" Header="National Team" />
                         <GridViewColumn DisplayMemberBinding="{Binding Age}" Header="Age" />
                         <GridViewColumn DisplayMemberBinding="{Binding Club}" Header="Club"/>

@@ -18,7 +18,7 @@ namespace MvvMSampleTests
         {
             var viewModel = new PlayerSearchViewModel(new PlayerProvider());
             viewModel.SearchPlayerText = "Bedoya";
-            var searchResult = viewModel.DisplayedPlayers.Cast<IPlayer>().ToArray(); //Cast objects extracted from the ICollectionView
+            var searchResult = viewModel.DisplayedPlayers.ToArray();
             Assert.AreEqual(1, searchResult.Length);
             IPlayer bedoya = searchResult[0];
             Assert.AreEqual("Nantes",bedoya.Club);

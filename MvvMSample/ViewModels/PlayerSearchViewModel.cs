@@ -5,18 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using BonenLawyer;
 using MvvMSample.Models;
 
 namespace MvvMSample.ViewModels
 {
     public class PlayerSearchViewModel : IPlayerSearchViewModel
     {
-        private readonly ICollectionView _view;
+        private readonly ICollectionView<IPlayer> _view;
         private string _textsearch;
 
         public PlayerSearchViewModel(IPlayerProvider playerProvider)
         {
-            _view = CollectionViewSource.GetDefaultView(playerProvider.GetAllWorldCupPlayer());
+            _view = new MyCollectionViewGeneric<IPlayer>(CollectionViewSource.GetDefaultView(playerProvider.GetAllWorldCupPlayer()));
             _view.Filter += (object item) =>
                 {
                     if (_textsearch == null) return true;
@@ -38,6 +39,6 @@ namespace MvvMSample.ViewModels
             }
         }
 
-        public ICollectionView DisplayedPlayers { get { return _view; } }
+        public ICollectionView<IPlayer> DisplayedPlayers { get { return _view; } }
     }
 }

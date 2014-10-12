@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BonenLawyer;
 
 namespace MvvMSample.ViewModels
 {
@@ -11,6 +12,6 @@ namespace MvvMSample.ViewModels
     {
         string SearchPlayerText { get; set; }
 
-        ICollectionView DisplayedPlayers { get; } 
+        ICollectionView<IPlayer> DisplayedPlayers { get; } 
     }
 }
