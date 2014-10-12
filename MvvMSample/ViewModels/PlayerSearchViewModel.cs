@@ -11,7 +11,7 @@ namespace MvvMSample.ViewModels
 {
     public class PlayerSearchViewModel : IPlayerSearchViewModel
     {
-        private ICollectionView _view;
+        private readonly ICollectionView _view;
         private string _textsearch;
 
         public PlayerSearchViewModel(IPlayerProvider playerProvider)
@@ -20,8 +20,7 @@ namespace MvvMSample.ViewModels
             _view.Filter += (object item) =>
                 {
                     if (_textsearch == null) return true;
-                    IPlayer itemPl = (IPlayer) item;
-                    
+                    var itemPl = (IPlayer) item;     
                     return itemPl.Name.Contains(_textsearch) ||
                                itemPl.NationalTeam.Contains(_textsearch) ||
                                itemPl.Club.Contains(_textsearch) ||

@@ -9,10 +9,8 @@
         <Binding Path="PlayerSearchViewModel" Source="{StaticResource Locator}" />
     </UserControl.DataContext>
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <TextBlock Text="Search player"></TextBlock>
-            <TextBox Text="{Binding SearchPlayerText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        </StackPanel>
+        <TextBlock DockPanel.Dock="Top" Text="Search player"></TextBlock>
+        <TextBox  DockPanel.Dock="Top" Text="{Binding SearchPlayerText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <ListView ItemsSource="{Binding DisplayedPlayers}"  SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.View>
                     <GridView >
